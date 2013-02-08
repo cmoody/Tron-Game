@@ -92,6 +92,10 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body {
+    background-image: url(../img/spaceBackground.jpg);
+    background-size: 100%;
+}
 #main {
     width: 300px;
     margin: 50px auto;

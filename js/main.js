@@ -54,7 +54,9 @@ var canvas = document.getElementById('canvas'),
 	gameOver = false,
 	i = 0
 	j = 0;
-			
+
+$('.reset').on('click', reset);
+	
 function init() {
 	draw();
 }
@@ -74,6 +76,7 @@ function endGame() {
 
 // Type into console to restart game
 function reset() {
+	cancelAnimationFrame(requestId);
 	player1.coordinates = [];
 	player1.coordinates[0] = { 
 		posx: 150,
@@ -144,6 +147,10 @@ function updateCycle(posx, posy) {
 function checkCollision(posx, posy) {
 	var coordLength = player1.coordinates.length - 1;
 
+	if(posx <= 0 || posx >= canvasWidth || posy <= 0 || posy >= canvasHeight) {
+		endGame();
+	}
+
 	for(k = 0; k < coordLength; k++) {
 		if(player1.coordinates[k].posx == posx && player1.coordinates[k].posy == posy) {
 			endGame();
@@ -153,7 +160,7 @@ function checkCollision(posx, posy) {
 
 function changeDirection(e) {
 	e.preventDefault();
-	
+
 	if(e.keyCode == 38) {
 		player1.direction = 'up';
 	}else if(e.keyCode == 40) {

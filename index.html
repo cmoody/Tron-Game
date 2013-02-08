@@ -15,9 +15,16 @@
     <body onload="init();">
         <div id="main">
             <!-- Create wrapper div to make tron cabinet -->
-            <canvas id="canvas" height="300" width="300"></canvas>
+            <div class="cabinet">
+                <div>
+                    <canvas id="canvas" height="300" width="300"></canvas>
+                </div>
+                <div class="menu">
+                    <button class="reset">New Game</button>
+                </div>
+            </div>
         </div>
-        
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.0.min.js"><\/script>')</script>
         <script src="js/main.js"></script>
