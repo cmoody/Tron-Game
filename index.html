@@ -9,19 +9,31 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
-    <body onload="init();">
+    <body>
+        <nav>
+            <p>Title and Social Media</p>
+        </nav>
         <div id="main">
-            <!-- Create wrapper div to make tron cabinet -->
+            <div class="player1">
+                <div class="title">Player 1</div>
+                <div class="score">0</div>
+            </div>
             <div class="cabinet">
+                <header></header>
                 <div>
-                    <canvas id="canvas" height="300" width="300"></canvas>
+                    <canvas id="canvas" height="301" width="290"></canvas>
                 </div>
                 <div class="menu">
                     <button class="reset">New Game</button>
                 </div>
+            </div>
+            <div class="computer">
+                <div class="title">Computer</div>
+                <div class="score">0</div>
             </div>
         </div>
 
