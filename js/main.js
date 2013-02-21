@@ -8,7 +8,7 @@
 	for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
 		window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
 		window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] 
-								   || window[vendors[x]+'CancelRequestAnimationFrame'];
+		|| window[vendors[x]+'CancelRequestAnimationFrame'];
 	}
  
 	if (!window.requestAnimationFrame)
@@ -60,7 +60,6 @@ var canvas = document.getElementById('canvas'),
 	canvasHeight = canvas.height,
 	requestId,
 	gameOver = false,
-	i = 0,
 	nextRound,
 	currentRound;
 
@@ -98,7 +97,6 @@ function reset() {
 
 	player1.direction = 'up';
 
-	i = 0;
 	gameOver = false;
 
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -128,8 +126,6 @@ function draw() {
 	if(!gameOver) {
 		requestId = requestAnimationFrame(draw);
 	}
-
-	i++;
 }
 
 function drawCycle() {
