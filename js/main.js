@@ -1,4 +1,7 @@
-// Paul Irish RequestAnimationFrame Gist https://gist.github.com/1579671
+/*
+ *	Paul Irish RequestAnimationFrame 
+ *	Gist https://gist.github.com/1579671
+ */
 (function() {
 	var lastTime = 0;
 	var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -25,56 +28,66 @@
 }());
 
 /*
-	Player Object
-	- Fix this object to reuse for multiple players
-*/
-// function tronCycle() {
-// 	coordinates = [
-// 		{ posx: 150, posy: 275 }
-// 	];
-
-// 	direction = 'up';
-// }
-var player1 = {
-	coordinates: [
-		{ posx: 150, posy: 275 }
-	],
+ *	Light Cycle Object
+ */
+var Cycle = {
+	coordinates: {},
 
 	direction: 'up',
+
+	color: '269bff',
 
 	avatar: 'img/tronCycle.png'
 };
 
-// Globals variables
+/*
+ *	Creates player1 and enemy objects
+ */
+var player1 = Object.create(Cycle);
+player1.coordinates = [{ posx: 150, posy: 275 }];
+
+var enemy = Object.create(Cycle);
+enemy.coordinates = [{ posx: 150, posy: 25 }];
+enemy.direction = 'down';
+enemy.color = 'ffe800';
+
+/*
+ *	Globals
+ */
 var canvas = document.getElementById('canvas'),
 	ctx = canvas.getContext('2d'),
 	canvasWidth = canvas.width,
 	canvasHeight = canvas.height,
 	requestId,
 	gameOver = false,
-	i = 0
-	j = 0;
+	i = 0,
+	nextRound,
+	currentRound;
 
 $('.reset').on('click', reset);
-	
-function init() {
-	draw();
-}
 
-function endGame() {
+function endGame(player) {
 	if (requestId) {
 		gameOver = true;
     	cancelAnimationFrame(requestId);
     	requestId = undefined;
 
+    	if(player) {
+    		player = "Player 1";
+    	}else{
+    		player = "Computer";
+    	}
+
     	ctx.fillStyle = '#f00';
 		ctx.font = 'italic bold 30px sans-serif';
 		ctx.textBaseline = 'bottom';
-		ctx.fillText('Game Over', 70, 100);
+		ctx.fillText(player + ' Loses!', 70, 100);
+
+		// Insert function to keep track of score and update on page
+		// Pass in crash coords to add in explosion animation
     }
 }
 
-// Type into console to restart game
 function reset() {
 	cancelAnimationFrame(requestId);
 	player1.coordinates = [];
@@ -86,7 +99,6 @@ function reset() {
 	player1.direction = 'up';
 
 	i = 0;
-	j = 0;
 	gameOver = false;
 
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -94,66 +106,138 @@ function reset() {
 }
  
 function draw() {
-	var currentposx = player1.coordinates[i].posx;
-	var currentposy = player1.coordinates[i].posy;
-	var currentDirection = player1.direction;
-	
-	updateCycle(currentposx, currentposy);
+	currentRound = player1.coordinates.length - 1;
+	nextRound = player1.coordinates.length;
 
-	j = i + 1;
+	// Draws Player1 & Enemy Cycles
+	drawCycle();
 
-	if(currentDirection == 'up') {
-		player1.coordinates[j] = { 
-			posy: currentposy - 1,
-			posx: currentposx
-		}
-	}else if(currentDirection == 'down') {
-		player1.coordinates[j] = { 
-			posy: currentposy + 1,
-			posx: currentposx
-		}
-	}else if(currentDirection == 'left') {
-		player1.coordinates[j] = { 
-			posy: currentposy,
-			posx: currentposx - 1
-		}
-	}else if(currentDirection == 'right') {
-		player1.coordinates[j] = { 
-			posy: currentposy,
-			posx: currentposx + 1
-		}
-	}
+	// Makes Decision for Enemy
+	enemyAI();
 
-	checkCollision(player1.coordinates[j].posx, player1.coordinates[j].posy);
+	// Updates Player1 Coordinates
+	playerAI();
 
+	// Checks to see if Enemy or Player loses
+	checkCollision();
+
+	// Checks keyboard input for direction
 	$(document).keydown(changeDirection);
 
-	i++;
-
+	// Determines if the game is over
 	if(!gameOver) {
 		requestId = requestAnimationFrame(draw);
 	}
+
+	i++;
 }
 
-function updateCycle(posx, posy) {
+function drawCycle() {
+	// Draws Player1 Cycle
 	// Rotate when going left/right
 	//ctx.drawImage(tronCycle, posx, posy);
 	ctx.beginPath();
-	ctx.rect(posx, posy, 4, 4);
-	ctx.fillStyle = '269bff';
+	ctx.rect(player1.coordinates[currentRound].posx, player1.coordinates[currentRound].posy, 4, 4);
+	ctx.fillStyle = player1.color;
+	ctx.fill();
+
+	// Draws Enemy Cycle
+	//ctx.drawImage(tronCycle, posx, posy);
+	ctx.beginPath();
+	ctx.rect(enemy.coordinates[currentRound].posx, enemy.coordinates[currentRound].posy, 4, 4);
+	ctx.fillStyle = enemy.color;
 	ctx.fill();
 }
 
-function checkCollision(posx, posy) {
-	var coordLength = player1.coordinates.length - 1;
+function playerAI() {
+	var posx, posy;
 
-	if(posx <= 0 || posx >= canvasWidth || posy <= 0 || posy >= canvasHeight) {
-		endGame();
+	if(player1.direction == 'up') {
+		posy = player1.coordinates[currentRound].posy - 1,
+		posx = player1.coordinates[currentRound].posx
+	}else if(player1.direction == 'down') {
+		posy = player1.coordinates[currentRound].posy + 1,
+		posx = player1.coordinates[currentRound].posx
+	}else if(player1.direction == 'left') {
+		posy = player1.coordinates[currentRound].posy,
+		posx = player1.coordinates[currentRound].posx - 1
+	}else if(player1.direction == 'right') {
+		posy = player1.coordinates[currentRound].posy,
+		posx = player1.coordinates[currentRound].posx + 1
 	}
 
-	for(k = 0; k < coordLength; k++) {
-		if(player1.coordinates[k].posx == posx && player1.coordinates[k].posy == posy) {
-			endGame();
+	player1.coordinates[nextRound] = { 
+		posy: posy,
+		posx: posx
+	}
+}
+
+function enemyAI() {
+	var posx, posy;
+	// Get current position
+	// Add +1 to current positions direction
+	// If +1 is == to player1 coordinates or enemy coordinates randomly choose left or right
+	// check if left or right is in arrays and if so go other way
+
+	// enemy.coordinates[player1CurrentCoords].posx
+	// enemy.coordinates[player1CurrentCoords].posy
+	// enemy.direction
+	// if(nextRound == 30) {
+	// 	enemy.direction = 'left';
+	// }
+
+	if(enemy.direction == 'up') {
+		posy = enemy.coordinates[currentRound].posy - 1,
+		posx = enemy.coordinates[currentRound].posx
+	}else if(enemy.direction == 'down') {
+		posy = enemy.coordinates[currentRound].posy + 1,
+		posx = enemy.coordinates[currentRound].posx
+	}else if(enemy.direction == 'left') {
+		posy = enemy.coordinates[currentRound].posy,
+		posx = enemy.coordinates[currentRound].posx - 1
+	}else if(enemy.direction == 'right') {
+		posy = enemy.coordinates[currentRound].posy,
+		posx = enemy.coordinates[currentRound].posx + 1
+	}
+
+	enemy.coordinates[nextRound] = { 
+		posy: posy,
+		posx: posx
+	}
+}
+
+function checkCollision() {
+	// Checks if player or enemy hit edge
+	if(player1.coordinates[nextRound].posx <= 0
+		|| player1.coordinates[nextRound].posx >= canvasWidth
+		|| player1.coordinates[nextRound].posy <= 0
+		|| player1.coordinates[nextRound].posy >= canvasHeight) {
+		endGame(true);
+	}
+
+	if(enemy.coordinates[nextRound].posx <= 0
+		|| enemy.coordinates[nextRound].posx >= canvasWidth
+		|| enemy.coordinates[nextRound].posy <= 0
+		|| enemy.coordinates[nextRound].posy >= canvasHeight) {
+		endGame(false);
+	}
+
+	// Checks if player or enemy coordinates cross
+	for(k = 0; k < nextRound; k++) {
+		// Player runs into self
+		if(player1.coordinates[k].posx == player1.coordinates[nextRound].posx
+			&& player1.coordinates[k].posy == player1.coordinates[nextRound].posy
+			|| player1.coordinates[nextRound].posx == enemy.coordinates[k].posx
+			&& player1.coordinates[nextRound].posy == enemy.coordinates[k].posy) {
+			endGame(true);
+		}
+
+		// Enemy runs into self
+		if(enemy.coordinates[k].posx == enemy.coordinates[nextRound].posx
+			&& enemy.coordinates[k].posy == enemy.coordinates[nextRound].posy
+			|| enemy.coordinates[nextRound].posx == player1.coordinates[k].posx
+			&& enemy.coordinates[nextRound].posy == player1.coordinates[k].posy) {
+			endGame(false);
 		}
 	}
 }
