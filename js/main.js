@@ -37,7 +37,9 @@ var Cycle = {
 
 	color: '269bff',
 
-	avatar: 'img/tronCycle.png'
+	avatar: 'img/tronCycle.png',
+
+	score: 0
 };
 
 /*
@@ -73,16 +75,18 @@ function endGame(player) {
 
     	if(player) {
     		player = "Player 1";
+    		enemy.score = enemy.score + 1;
+    		$('.computer .score').html(enemy.score);
     	}else{
     		player = "Computer";
+    		player1.score = player1.score + 1;
+    		$('.player1 .score').html(player1.score);
     	}
 
     	ctx.fillStyle = '#f00';
 		ctx.font = 'italic bold 30px sans-serif';
 		ctx.textBaseline = 'bottom';
 		ctx.fillText(player + ' Loses!', 70, 100);
-
-		// Insert function to keep track of score and update on page
 		// Pass in crash coords to add in explosion animation
     }
 }
