@@ -83,6 +83,7 @@ function endGame(player) {
     		$('.player1 .score').html(player1.score);
     	}
 
+    	// Remove when explosion finished
     	ctx.fillStyle = '#f00';
 		ctx.font = 'italic bold 30px sans-serif';
 		ctx.textBaseline = 'bottom';
@@ -94,7 +95,7 @@ function endGame(player) {
 }
 
 function endGameExplosion() {
-	
+
 }
 
 function reset() {
@@ -105,7 +106,14 @@ function reset() {
 		posy: 275
 	};
 
+	enemy.coordinates = [];
+	enemy.coordinates[0] = { 
+		posx: 150,
+		posy: 25
+	};
+
 	player1.direction = 'up';
+	enemy.direction = 'down';
 
 	gameOver = false;
 
@@ -139,9 +147,15 @@ function draw() {
 }
 
 function drawCycle() {
+	ctx.save();
+
+	ctx.shadowBlur = 10;
+	ctx.shadowColor = 'rgba(255, 255, 255, 0.4)';
+
 	// Draws Player1 Cycle
 	// Rotate when going left/right
 	//ctx.drawImage(tronCycle, posx, posy);
+
 	ctx.beginPath();
 	ctx.rect(player1.coordinates[currentRound].posx, player1.coordinates[currentRound].posy, 4, 4);
 	ctx.fillStyle = player1.color;
@@ -153,6 +167,8 @@ function drawCycle() {
 	ctx.rect(enemy.coordinates[currentRound].posx, enemy.coordinates[currentRound].posy, 4, 4);
 	ctx.fillStyle = enemy.color;
 	ctx.fill();
+
+	ctx.restore();
 }
 
 function playerAI() {
