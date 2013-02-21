@@ -87,8 +87,14 @@ function endGame(player) {
 		ctx.font = 'italic bold 30px sans-serif';
 		ctx.textBaseline = 'bottom';
 		ctx.fillText(player + ' Loses!', 70, 100);
+
 		// Pass in crash coords to add in explosion animation
+		// endGameExplosion(coords, color);
     }
+}
+
+function endGameExplosion() {
+	
 }
 
 function reset() {
