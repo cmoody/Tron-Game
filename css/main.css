@@ -109,6 +109,9 @@ nav {
     top: 0;
     width: 100%;
 }
+  nav ul li {
+    display: inline;
+  }
 
 #main {
     width: 1280px;

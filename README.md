@@ -1,8 +1,6 @@
 - Main Menu
 - AI for second bike
-- Glow on cycle trail - better cycles and colors
 - Bike img for user
-- Node for multiplayer
 - Easter egg tron guy some how
 - Daft punk in background
 - Turn New Game into arcade style button
