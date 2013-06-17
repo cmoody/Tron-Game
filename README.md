@@ -5,6 +5,7 @@
 - Daft punk in background
 - Turn New Game into arcade style button
 - Alternative menu idea to make it DOM elements
+- Track score in LocalStorage
 
 /*********************
  Blog Post Outline
