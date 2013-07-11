@@ -27,6 +27,7 @@
 		};
 }());
 
+// jlongster.com/Making-Sprite-based-Games-with-Canvas
 (function(){
 	/*
 	 *	Light Cycle Object
