@@ -1,0 +1,25 @@
+{
+  "name": "Tron-Game",
+  "version": "0.0.2",
+  "homepage": "https://github.com/cmoody/Tron-Game",
+  "authors": [
+    "Chase Moody <chase.moody@mutualmobile.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "requirejs": "~2.1.14",
+    "requirejs-text": "~2.0.10"
+  }
+}
