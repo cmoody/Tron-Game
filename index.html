@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li>
+                    <div class="fb-like" data-href="#" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+                </li>
+                <li>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="chasethebits">Tweet</a>
+                </li>
+            </ul>
+        </nav>
+        <div id="main">
+            <div class="player1">
+                <div class="title">Player 1</div>
+                <div class="score">0</div>
+            </div>
+            <div class="cabinet">
+                <header></header>
+                <div>
+                    <canvas id="canvas" height="301" width="290"></canvas>
+                </div>
+                <div class="menu">
+                    <button class="reset">New Game</button>
+                </div>
+            </div>
+            <div class="computer">
+                <div class="title">Computer</div>
+                <div class="score">0</div>
+            </div>
+        </div>
+
+        <script src="js/vendor/requirejs/require.js" data-main="js/main.js"></script>
+
+        <!-- Social Media Javascript -->
+        <!--<div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=460920593926247";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+    </body>
+</html>
