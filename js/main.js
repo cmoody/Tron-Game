@@ -10,8 +10,9 @@ require.config({
 
 require([
 	'libs/rAF',
-], function() {
-	var draw = require('app/draw');
+	'app/draw'
+], function(draw) {
+	//var draw = require('app/draw');
 
 	// Move to canvas module?
 	// var canvas = document.getElementById('canvas');

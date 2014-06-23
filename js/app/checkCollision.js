@@ -3,7 +3,7 @@ define(function(require) {
 
 	// Need access to player1 and enemy objects
 
-	function checkCollision() {
+	function checkCollision(player1, enemy) {
 		// Checks if player or enemy hit edge
 		if(player1.coordinates[nextRound].posx <= 0
 			|| player1.coordinates[nextRound].posx >= canvasWidth

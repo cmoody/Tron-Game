@@ -1,36 +1,57 @@
 define(function(require) {
 	"use strict";
 
-	var LightCycle = require('app/lightCycle');
-	var Game = require('app/game'); // Holds game data
-	var changeDirection = require('app/changeDirection');
+	// Vendor
+	var $ = require('jquery');
+	var requestAnimationFrame = require('libs/rAF');
 
-	// Maybe add to Game object?
+	// Cycle
+	var LightCycle = require('app/lightCycle');
+
+	// Game Object
+	var Game = require('app/game');
+
+	// Player and Enemy Objects
 	var player1 = new LightCycle();
 	var enemy = new LightCycle();
+
+	//
+	var $doc = $(document);
 
 	function draw() {
 		Game.nextRound = player1.coordinates.length;
 		Game.currentRound = nextRound - 1;	
 
 		// Draws Player1 & Enemy Cycles
-		drawCycle();
+		drawCycle(player1, enemy);
 
 		// Makes Decision for Enemy
-		enemyAI();
+		enemyAI(enemy);
 
 		// Updates Player1 Coordinates
-		playerAI();
+		playerAI(player1);
 
 		// Checks to see if Enemy or Player loses
-		checkCollision();
+		checkCollision(player1, enemy);
 
 		// Checks keyboard input for direction
-		$(document).keydown(changeDirection);
+		$doc.keydown(function(e) {
+			e.preventDefault();
+
+			if(e.keyCode == 38) {
+				player1.direction = 'up';
+			}else if(e.keyCode == 40) {
+				player1.direction = 'down';
+			}else if(e.keyCode == 37) {
+				player1.direction = 'left';
+			}else if(e.keyCode == 39) {
+				player1.direction = 'right';
+			}
+		});
 
 		// Determines if the game is over
-		if(!gameOver) {
-			requestId = requestAnimationFrame(draw);
+		if(!Game.gameOver) {
+			Game.requestId = requestAnimationFrame(this);
 		}
 	}
 

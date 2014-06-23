@@ -4,7 +4,7 @@ define(function(require) {
 	var Game = require('app/game');
 	// Needs access to player1 and enemy obj
 
-	function drawCycle() {
+	function drawCycle(player1, enemy) {
 		Game.ctx.save();
 
 		Game.ctx.shadowBlur = 10;

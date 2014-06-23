@@ -1,21 +1,5 @@
-// Split up with requirejs
 // jlongster.com/Making-Sprite-based-Games-with-Canvas
 (function(){
-	/*
-	 *	Light Cycle Object
-	 */
-	// var Cycle = {
-	// 	coordinates: {},
-
-	// 	direction: 'up',
-
-	// 	color: '269bff',
-
-	// 	avatar: 'img/tronCycle.png',
-
-	// 	score: 0
-	// };
-
 	/*
 	 * Alternative Light Cycle Object
 	 */
@@ -184,21 +168,6 @@
 				break;
 		}
 
-		// Alternative to Switch
-		// if(player1.direction == 'up') {
-		// 	posy = player1.coordinates[currentRound].posy - 1,
-		// 	posx = player1.coordinates[currentRound].posx
-		// }else if(player1.direction == 'down') {
-		// 	posy = player1.coordinates[currentRound].posy + 1,
-		// 	posx = player1.coordinates[currentRound].posx
-		// }else if(player1.direction == 'left') {
-		// 	posy = player1.coordinates[currentRound].posy,
-		// 	posx = player1.coordinates[currentRound].posx - 1
-		// }else if(player1.direction == 'right') {
-		// 	posy = player1.coordinates[currentRound].posy,
-		// 	posx = player1.coordinates[currentRound].posx + 1
-		// }
-
 		player1.coordinates[nextRound] = { 
 			posy: posy,
 			posx: posx
@@ -217,20 +186,6 @@
 		// enemy has to check all possible directions and then make a decision on which direction to go
 		
 		/*
-		if(enemy.direction == 'up') {
-			posy = enemy.coordinates[currentRound].posy - 1, // Make these the if check not direction
-			posx = enemy.coordinates[currentRound].posx
-		}else if(enemy.direction == 'down') {
-			posy = enemy.coordinates[currentRound].posy + 1,
-			posx = enemy.coordinates[currentRound].posx
-		}else if(enemy.direction == 'left') {
-			posy = enemy.coordinates[currentRound].posy,
-			posx = enemy.coordinates[currentRound].posx - 1
-		}else if(enemy.direction == 'right') {
-			posy = enemy.coordinates[currentRound].posy,
-			posx = enemy.coordinates[currentRound].posx + 1
-		}
-
 		var player1Length = player1.coordinates.Length;
 		for(var i = 0; i < player1Length; i++) {
 			// if current direction is good stay course
@@ -263,20 +218,6 @@
 				posx = enemy.coordinates[currentRound].posx;
 				break;
 		}
-
-		// if(enemy.direction == 'up') {
-		// 	posy = enemy.coordinates[currentRound].posy - 1,
-		// 	posx = enemy.coordinates[currentRound].posx
-		// }else if(enemy.direction == 'down') {
-		// 	posy = enemy.coordinates[currentRound].posy + 1,
-		// 	posx = enemy.coordinates[currentRound].posx
-		// }else if(enemy.direction == 'left') {
-		// 	posy = enemy.coordinates[currentRound].posy,
-		// 	posx = enemy.coordinates[currentRound].posx - 1
-		// }else if(enemy.direction == 'right') {
-		// 	posy = enemy.coordinates[currentRound].posy,
-		// 	posx = enemy.coordinates[currentRound].posx + 1
-		// }
 
 		// var coords = updateCoordinates(enemy);
 		// console.log(coords);
