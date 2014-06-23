@@ -3,7 +3,7 @@ define(function(require) {
 
 	// Needs access to enemy object
 
-	function enemyAI() {
+	function enemyAI(enemy) {
 		var posx, posy;
 		// Get current position
 		// Add +1 to current positions direction
