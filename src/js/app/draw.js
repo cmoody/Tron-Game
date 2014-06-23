@@ -50,8 +50,8 @@ define(function(require) {
 		});
 
 		// Determines if the game is over
-		if(!gameOver) {
-			requestId = requestAnimationFrame(draw);
+		if(!Game.gameOver) {
+			Game.requestId = requestAnimationFrame(this);
 		}
 	}
 
